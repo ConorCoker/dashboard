@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Dashboard</string>
     <string name="cd_create_item">Create a new item</string>
+    <string name="cd_more_info">More Info</string>
 </resources>
