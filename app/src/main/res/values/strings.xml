@@ -2,4 +2,10 @@
     <string name="app_name">Dashboard</string>
     <string name="cd_create_item">Create a new item</string>
     <string name="cd_more_info">More Info</string>
+    <string name="not_available_yet">Not available yet</string>
+    <string name="label_name">Compose Academy</string>
+    <string name="label_email">contact@compose.academy</string>
+    <string name = "label_logout">Logout</string>
+    <string name="cd_open_menu">Open Menu</string>
+    <string name="cd_navigate_up">Go back Home</string>
 </resources>
