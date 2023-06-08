@@ -2,14 +2,20 @@ package com.example.dashboard.compostables
 
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.dashboard.navigation.Destination
 import com.example.dashboard.utils.capitalizeFirstLetter
 import org.junit.Rule
 import org.junit.Test
 import com.example.dashboard.R
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+
 
 class ChildDestinationTopBarTest {
 
@@ -31,7 +37,7 @@ class ChildDestinationTopBarTest {
      onNodeWithText function.*/
 
     @Test
-    fun titleDisplayed(){
+    fun titleDisplayed() {
         val title = capitalizeFirstLetter(Destination.Feed.path)
         composeTestRule.setContent {
             ChildDestinationTopBar(title = title) {
@@ -41,15 +47,33 @@ class ChildDestinationTopBarTest {
         composeTestRule.onNodeWithText(title).assertIsDisplayed()
     }
 
-   @Test
-   fun navigationItemDisplayed(){
-       composeTestRule.setContent {
-           ChildDestinationTopBar(title = capitalizeFirstLetter(Destination.Feed.path), onNavigateUp = {})
-           composeTestRule.onNodeWithContentDescription(stringResource(id = R.string.cd_navigate_up)).assertIsDisplayed()
-       }
+    @Test
+    fun navigationItemDisplayed() {
+        val title = capitalizeFirstLetter(Destination.Feed.path)
+        composeTestRule.setContent {
+            ChildDestinationTopBar(title = title, onNavigateUp = {})
+        }
+        composeTestRule.onNodeWithContentDescription( //need InstrumentationRegistry to get access to string res here, //targetContext as context was not working
+            InstrumentationRegistry.getInstrumentation().targetContext.getString(R.string.cd_navigate_up)
+        ).assertIsDisplayed()
 
 
-   }
+    }
+
+    @Test
+    fun navigationIconTriggersCallback() {
+        val onUpClicked: () -> Unit = mock()
+        composeTestRule.setContent {   //mock implementation being used
+            ChildDestinationTopBar(title = "title", onNavigateUp = onUpClicked)
+        }
+        composeTestRule.onNodeWithContentDescription(
+            InstrumentationRegistry.getInstrumentation().targetContext.getString(
+                R.string.cd_navigate_up
+            )
+        )
+            .performClick() //trigger on up clicked lambda we have mock implementation which will know was it clicked
+        verify(onUpClicked).invoke() //verify it was invoked
+    }
 
 
 }

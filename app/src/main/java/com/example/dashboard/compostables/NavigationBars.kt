@@ -12,15 +12,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.example.dashboard.R
 import com.example.dashboard.models.NavigationBarItem
 import com.example.dashboard.navigation.Destination
+import com.example.dashboard.tags.Tags
 import com.example.dashboard.utils.capitalizeFirstLetter
 
 @Composable
 fun BottomNavigationBar(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.testTag(Tags.BOTTOM_NAV),
     currentDestination: Destination,
     onNavigate: (destination: Destination) -> Unit
 ) {
@@ -37,7 +39,7 @@ fun BottomNavigationBar(
 }
 
 @Composable
-fun RailNavigationBar(modifier: Modifier = Modifier,currentDestination: Destination,onNavigate: (destination: Destination) -> Unit,onCreateItem:() -> Unit){
+fun RailNavigationBar(modifier: Modifier = Modifier.testTag(Tags.TAG_RAIL_NAV),currentDestination: Destination,onNavigate: (destination: Destination) -> Unit,onCreateItem:() -> Unit){
     NavigationRail(header = {
         FloatingActionButton(onClick = { onCreateItem() }) {
             Icon(

@@ -13,9 +13,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.example.dashboard.R
 import com.example.dashboard.navigation.Destination
+import com.example.dashboard.tags.Tags.TAG_CHILD_TOP_BAR
+import com.example.dashboard.tags.Tags.TAG_ROOT_TOP_BAR
 import com.example.dashboard.utils.capitalizeFirstLetter
 
 @Composable
@@ -45,7 +48,7 @@ fun DestinationTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RootTopAppBar(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.testTag(TAG_ROOT_TOP_BAR),
     currentDestination: Destination,
     showSnackBar: () -> Unit,
     openDrawer: () -> Unit
@@ -91,7 +94,7 @@ fun RootTopAppBar(
 @Composable
 fun ChildDestinationTopBar(modifier: Modifier = Modifier, title: String,onNavigateUp:() -> Unit) {
     TopAppBar(
-        modifier = modifier,
+        modifier = modifier.testTag(TAG_CHILD_TOP_BAR),
         title = {
             Text(text = title)
         }, navigationIcon = { //onNavigateUp() informs caller to navigate "up" to root package
