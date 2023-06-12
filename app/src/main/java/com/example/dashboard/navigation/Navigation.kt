@@ -33,13 +33,13 @@ fun Navigation(modifier: Modifier = Modifier, navController: NavHostController) 
             composable(Destination.Calendar.path) {
                 ContentArea(modifier = Modifier.fillMaxSize(), destination = Destination.Calendar)
             }
-            //Outside that nest ^ not inside any nest as no need.
-            composable(route = Destination.Settings.path) {
-                ContentArea(modifier = Modifier.fillMaxSize(), destination = Destination.Settings)
-            }
-            composable(route = Destination.Upgrade.path) {
-                ContentArea(modifier = Modifier.fillMaxSize(), destination = Destination.Upgrade)
-            }
+        }
+        //Outside that nest ^ not inside any nest as no need.
+        composable(route = Destination.Settings.path) {
+            ContentArea(modifier = Modifier.fillMaxSize(), destination = Destination.Settings)
+        }
+        composable(route = Destination.Upgrade.path) {
+            ContentArea(modifier = Modifier.fillMaxSize(), destination = Destination.Upgrade)
         }
         navigation(startDestination = Destination.Creation.path, route = Destination.Add.path) {
             composable(route = Destination.Creation.path) {

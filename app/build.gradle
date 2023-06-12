@@ -64,6 +64,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+
+    //screen rotate during test
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
     //mockito
     androidTestImplementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
     androidTestImplementation 'org.mockito:mockito-android:3.12.4'

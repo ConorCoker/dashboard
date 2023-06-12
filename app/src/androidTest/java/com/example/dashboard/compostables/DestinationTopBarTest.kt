@@ -1,6 +1,7 @@
 package com.example.dashboard.compostables
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.example.dashboard.navigation.Destination
@@ -14,21 +15,20 @@ class DestinationTopBarTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun rootDestinationTopBarIsDisplayedWhenInRootDestination(){
+    fun rootDestinationTopBarIsDisplayedWhenInRootDestination() {
         composeTestRule.setContent {
             DestinationTopBar(
-                destination = Destination.Feed,
+                destination = Destination.Calendar,
                 onNavigateUp = { /*TODO*/ },
-                onOpenDrawer = { /*TODO*/ }) {
-
-            }
+                onOpenDrawer = { /*TODO*/ },
+                showSnackBar = {})
 
         }
         composeTestRule.onNodeWithTag(Tags.TAG_ROOT_TOP_BAR).assertIsDisplayed()
     }
 
     @Test
-    fun rootDestinationTopBarIsNotDisplayedWhenNotInRootDestination(){
+    fun rootDestinationTopBarIsNotDisplayedWhenNotInRootDestination() {
         composeTestRule.setContent {
             DestinationTopBar(
                 destination = Destination.Add,
@@ -42,7 +42,7 @@ class DestinationTopBarTest {
     }
 
     @Test
-    fun childDestinationTopBarIsDisplayedWhenInChildDestination(){
+    fun childDestinationTopBarIsDisplayedWhenInChildDestination() {
         composeTestRule.setContent {
             DestinationTopBar(
                 destination = Destination.Add,
@@ -53,6 +53,20 @@ class DestinationTopBarTest {
 
         }
         composeTestRule.onNodeWithTag(Tags.TAG_CHILD_TOP_BAR).assertIsDisplayed()
+    }
+
+    @Test
+    fun childDestinationTopBarIsNotDisplayedWhenNotInChildDestination() {
+        composeTestRule.setContent {
+            DestinationTopBar(
+                destination = Destination.Feed,
+                onNavigateUp = { /*TODO*/ },
+                onOpenDrawer = { /*TODO*/ }) {
+
+            }
+
+        }
+        composeTestRule.onNodeWithTag(Tags.TAG_CHILD_TOP_BAR).assertDoesNotExist()
     }
 
 }

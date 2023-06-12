@@ -1,6 +1,8 @@
 package com.example.dashboard.compostables
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -43,9 +45,9 @@ class BottomNavigationTest {
         composeTestRule.setContent {
             BottomNavigationBar(currentDestination = Destination.Feed, onNavigate = {})
         }
-        composeTestRule.onNodeWithText(capitalizeFirstLetter(Destination.Feed.path)).assertIsSelected() //needs fixing
-//        composeTestRule.onNodeWithText(capitalizeFirstLetter(Destination.Calendar.path)).assertIsSelected()
-//        composeTestRule.onNodeWithText(capitalizeFirstLetter(Destination.Contacts.path)).assertIsSelected()
+        composeTestRule.onNodeWithText(capitalizeFirstLetter(Destination.Feed.path)).assertIsSelected()
+        composeTestRule.onNodeWithText(capitalizeFirstLetter(Destination.Calendar.path)).assertIsNotSelected()
+        composeTestRule.onNodeWithText(capitalizeFirstLetter(Destination.Contacts.path)).assertIsNotSelected()
     }
 
     @Test

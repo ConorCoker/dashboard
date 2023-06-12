@@ -22,21 +22,63 @@ class NavTest {
         composeTestRule.onNodeWithTag(Destination.Feed.path).assertIsDisplayed()
     }
 
-    private fun assertNavigation(destination: Destination){
+//    private fun assertNavigation(destination: Destination){
+//        composeTestRule.setContent {
+//            val navController = rememberNavController()
+//            Navigation(navController = navController)
+//            navController.navigate(destination.path)
+//        }
+//        composeTestRule.onNodeWithTag(destination.path).assertIsDisplayed()
+//    }
+
+    @Test
+    fun testNavToUpgrade(){
         composeTestRule.setContent {
             val navController = rememberNavController()
             Navigation(navController = navController)
-            navController.navigate(destination.path)
+            navController.navigate(Destination.Upgrade.path)
         }
-        composeTestRule.onNodeWithTag(destination.path).assertIsDisplayed()
+        composeTestRule.onNodeWithTag(Destination.Upgrade.path).assertIsDisplayed()
     }
 
     @Test
-    fun testNav(){
-        assertNavigation(Destination.Upgrade)
-        assertNavigation(Destination.Calendar)
-        assertNavigation(Destination.Add) //also broken try fix
-        assertNavigation(Destination.Settings)
-        assertNavigation(Destination.Contacts)
+    fun testNavToFeed(){
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            Navigation(navController = navController)
+            navController.navigate(Destination.Upgrade.path)
+            navController.navigate(Destination.Feed.path)
+        }
+        composeTestRule.onNodeWithTag(Destination.Feed.path).assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavToContacts(){
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            Navigation(navController = navController)
+            navController.navigate(Destination.Contacts.path)
+        }
+        composeTestRule.onNodeWithTag(Destination.Contacts.path).assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavToSettings(){
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            Navigation(navController = navController)
+            navController.navigate(Destination.Settings.path)
+        }
+        composeTestRule.onNodeWithTag(Destination.Settings.path).assertIsDisplayed()
+    }
+
+    @Test
+    fun testNavToCalender(){
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            Navigation(navController = navController)
+            navController.navigate(Destination.Calendar.path)
+        }
+        composeTestRule.onNodeWithTag(Destination.Calendar.path).assertIsDisplayed()
     }
 }

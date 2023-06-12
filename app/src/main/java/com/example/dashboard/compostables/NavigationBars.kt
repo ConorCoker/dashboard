@@ -30,7 +30,7 @@ fun BottomNavigationBar(
         buildNavigationBarItems(currentDestination, onNavigate).forEach {
             NavigationBarItem(
                 selected = it.selected,
-                onClick = { it.onClick },
+                onClick = { it.onClick() },
                 icon = it.icon,
                 label = it.label
             )
@@ -39,7 +39,7 @@ fun BottomNavigationBar(
 }
 
 @Composable
-fun RailNavigationBar(modifier: Modifier = Modifier.testTag(Tags.TAG_RAIL_NAV),currentDestination: Destination,onNavigate: (destination: Destination) -> Unit,onCreateItem:() -> Unit){
+fun RailNavigationBar(modifier: Modifier = Modifier,currentDestination: Destination,onNavigate: (destination: Destination) -> Unit,onCreateItem:() -> Unit){
     NavigationRail(header = {
         FloatingActionButton(onClick = { onCreateItem() }) {
             Icon(
@@ -47,9 +47,9 @@ fun RailNavigationBar(modifier: Modifier = Modifier.testTag(Tags.TAG_RAIL_NAV),c
                 contentDescription = stringResource(id = R.string.cd_create_item)
             )
         }
-    }) {
-        buildNavigationBarItems(currentDestination,onNavigate).map{
-            NavigationRailItem(selected = it.selected, onClick = { it.onClick }, label = {it.label()}, icon = {it.icon()})
+    }, modifier = Modifier.testTag(Tags.TAG_RAIL_NAV)) {
+        buildNavigationBarItems(currentDestination, onNavigate).map{
+            NavigationRailItem(selected = it.selected, onClick = { it.onClick() }, label = {it.label()}, icon = {it.icon()})
         }
     }
 }

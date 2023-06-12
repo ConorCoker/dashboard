@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.LocaleConfig
 import android.content.res.Configuration
 import android.graphics.drawable.GradientDrawable.Orientation
+import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -148,10 +149,11 @@ fun Home(modifier: Modifier = Modifier) {
             }
         }, bottomBar = {
             if (orientation != Configuration.ORIENTATION_LANDSCAPE && currentDestination.isRootDestination) {
-                BottomNavigationBar(currentDestination = Destination.Home, onNavigate = {
+                BottomNavigationBar(currentDestination = currentDestination, onNavigate = {
                     /*PopUpTo will pop the back stack up until a defined destination, which allows
                     us to avoid building up a large collection of entries within our
                     back stack */
+                    Log.d("navigation","navigating to ${it.path}")
                     navController.navigate(it.path) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true

@@ -48,7 +48,7 @@ fun DestinationTopBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RootTopAppBar(
-    modifier: Modifier = Modifier.testTag(TAG_ROOT_TOP_BAR),
+    modifier: Modifier = Modifier,
     currentDestination: Destination,
     showSnackBar: () -> Unit,
     openDrawer: () -> Unit
@@ -86,7 +86,7 @@ fun RootTopAppBar(
                     )
                 }
             }
-        }
+        }, modifier = Modifier.testTag(TAG_ROOT_TOP_BAR)
     )
 }
 
